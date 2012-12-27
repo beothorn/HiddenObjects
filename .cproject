@@ -24,6 +24,7 @@
 								<option id="gnu.c.compiler.option.debugging.level.1450621706" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" value="gnu.c.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.include.paths.1921985167" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="/home/lucas/sdk/irrlicht-1.8/include"/>
+									<listOptionValue builtIn="false" value="/home/lucas/workspaceC/HiddenObject/src"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.683493114" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -32,6 +33,7 @@
 								<option id="gnu.cpp.compiler.option.debugging.level.335249578" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.310747901" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="/home/lucas/sdk/irrlicht-1.8/include"/>
+									<listOptionValue builtIn="false" value="/home/lucas/workspaceC/HiddenObject/src"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1813728633" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>

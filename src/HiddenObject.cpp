@@ -1,8 +1,8 @@
 #include <irrlicht.h>
 #include <string>
 
-#include "/home/lucas/workspaceC/HiddenObject/src/MouseEventReceiver.h"
-#include "/home/lucas/workspaceC/HiddenObject/src/CursorUtil.h"
+#include "MouseEventReceiver.h"
+#include "CursorUtil.h"
 #include <map>
 
 using namespace irr;
@@ -56,7 +56,7 @@ int main()
 	CursorUtil nodeOverMouse = CursorUtil(collisionManager,device);
 	mouseEventReceiver.setCursorUtil(&nodeOverMouse);
 
-	std::string resources = "/home/lucas/sdk/irrlicht-1.8/media/";
+	std::string resources = "./resources/";
 	std::string sydneyMesh = "sydney.md2";
 	std::string sydneyMaterial = "sydney.bmp";
 	IAnimatedMesh* mesh = sceneManager->getMesh((resources+sydneyMesh).c_str());
@@ -80,7 +80,7 @@ int main()
 
 	mouseEventReceiver.setLabel(label,objects);
 
-	sceneManager->addCameraSceneNode(0, vector3df(0,5,-40), vector3df(0,5,0));
+	sceneManager->addCameraSceneNode(0, vector3df(0,5,-400), vector3df(0,5,0));
 
 	while(device->run())
 	{
