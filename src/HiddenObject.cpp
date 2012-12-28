@@ -3,7 +3,6 @@
 
 #include "MouseEventReceiver.h"
 #include "CursorUtil.h"
-#include <map>
 
 using namespace irr;
 
@@ -72,13 +71,10 @@ int main()
 		node->setMaterialFlag(EMF_LIGHTING, false);
 		node->setMD2Animation(scene::EMAT_RUN);
 		node->setMaterialTexture( 0, driver->getTexture((resources+sydneyMaterial).c_str()) );
+		node->setName(L"foo");
 	}
 
-	std::map< ISceneNode*, const wchar_t*> objects;
-
-	objects[node] = L"Sydney";
-
-	mouseEventReceiver.setLabel(label,objects);
+	mouseEventReceiver.setLabel(label);
 
 	sceneManager->addCameraSceneNode(0, vector3df(0,5,-400), vector3df(0,5,0));
 
