@@ -4,6 +4,10 @@
 #include "MouseEventReceiver.h"
 #include "CursorUtil.h"
 
+#include <iostream>
+
+using namespace std;
+
 using namespace irr;
 
 using namespace core;
@@ -25,9 +29,13 @@ losing platform independence then.
 #pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
 #endif
 
+IrrlichtDevice *device;
+ISceneManager* sceneManager;
+MouseEventReceiver mouseEventReceiver;
+IVideoDriver* driver;
+IGUIEnvironment* guienv;
 
-int main()
-{
+void startEngine(){
 	irr::video::E_DRIVER_TYPE deviceType = video::EDT_SOFTWARE;
 	int width = 800;
 	int height = 600;
@@ -37,23 +45,24 @@ int main()
 	bool stencilbuffer = false;
 	bool vsync = false;
 
-	MouseEventReceiver mouseEventReceiver;
-	IrrlichtDevice *device = createDevice(deviceType, windowSize, bits,fullscreen, stencilbuffer, vsync, &mouseEventReceiver);
-
-	if (!device){
-		return 1;
-	}
-
-	device->setWindowCaption(L"Find the hidden objects");
-
-	IVideoDriver* driver = device->getVideoDriver();
-	ISceneManager* sceneManager = device->getSceneManager();
-	IGUIEnvironment* guienv = device->getGUIEnvironment();
+	device = createDevice(deviceType, windowSize, bits,fullscreen, stencilbuffer, vsync, &mouseEventReceiver);
+	if (!device) exit (1);
+	sceneManager = device->getSceneManager();
 	scene::ISceneCollisionManager* collisionManager = sceneManager->getSceneCollisionManager();
-	irr::gui::IGUIStaticText* label = guienv->addStaticText(L"Lets hope this one works", rect<s32>(10, 10, 260, 22), true);
+	CursorUtil *nodeOverMouse = new CursorUtil(collisionManager,device);
+	mouseEventReceiver.setCursorUtil(nodeOverMouse);
 
-	CursorUtil nodeOverMouse = CursorUtil(collisionManager,device);
-	mouseEventReceiver.setCursorUtil(&nodeOverMouse);
+	driver = device->getVideoDriver();
+	guienv = device->getGUIEnvironment();
+}
+
+void endGame(){
+	device->drop();
+}
+
+void setupGame(){
+	device->setWindowCaption(L"Find the hidden objects");
+	irr::gui::IGUIStaticText* label = guienv->addStaticText(L"Lets hope this one works", rect<s32>(10, 10, 260, 22), true);
 
 	std::string resources = "./resources/";
 	std::string sydneyMesh = "sydney.md2";
@@ -61,11 +70,10 @@ int main()
 	IAnimatedMesh* mesh = sceneManager->getMesh((resources+sydneyMesh).c_str());
 	if (!mesh)
 	{
-		device->drop();
-		return 1;
+		endGame();
+		exit(1);
 	}
 	IAnimatedMeshSceneNode* node = sceneManager->addAnimatedMeshSceneNode( mesh );
-
 	if (node)
 	{
 		node->setMaterialFlag(EMF_LIGHTING, false);
@@ -77,16 +85,25 @@ int main()
 	mouseEventReceiver.setLabel(label);
 
 	sceneManager->addCameraSceneNode(0, vector3df(0,5,-400), vector3df(0,5,0));
+}
 
-	while(device->run())
-	{
+void enterGameLoop(){
+	while(device->run()){
 		driver->beginScene(true, true, SColor(255,100,101,140));
 		sceneManager->drawAll();
 		guienv->drawAll();
-
 		driver->endScene();
 	}
+}
 
-	device->drop();
-	return 0;
+int main()
+{
+	cout << "main.startEngine()\n";
+	startEngine();
+	cout << "main.setupGame()\n";
+	setupGame();
+	cout << "main.enterGameLoop()\n";
+	enterGameLoop();
+	cout << "main.endGame()\n";
+	endGame();
 }
