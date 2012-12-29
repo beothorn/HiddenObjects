@@ -5,10 +5,11 @@
 
 class SydneyFactory {
 public:
-	irr::scene::ISceneManager* sceneManager;
-	irr::video::IVideoDriver* driver;
 	SydneyFactory(irr::scene::ISceneManager* sceneManager,irr::video::IVideoDriver* driver);
 	void produce(int x);
+private:
+	irr::scene::ISceneManager* sceneManager;
+	irr::video::IVideoDriver* driver;
 };
 
 #endif /* SYDNEY_H_ */

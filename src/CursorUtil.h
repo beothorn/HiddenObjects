@@ -14,10 +14,11 @@ using namespace irr;
 
 class CursorUtil {
 public:
-	scene::ISceneCollisionManager* sceneCollisionManager;
-	IrrlichtDevice *device;
 	CursorUtil(scene::ISceneCollisionManager* sceneCollisionManager, IrrlichtDevice *device);
 	irr::scene::ISceneNode* getNodeOverCursor();
+private:
+	scene::ISceneCollisionManager* sceneCollisionManager;
+	IrrlichtDevice *device;
 };
 
 #endif /* NODEOVERMOUSE_H_ */

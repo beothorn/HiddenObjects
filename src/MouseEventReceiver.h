@@ -14,11 +14,12 @@
 
 class MouseEventReceiver: public irr::IEventReceiver {
 public:
-	CursorUtil *cursorUtil;
-	irr::gui::IGUIStaticText* label;
 	void setCursorUtil(CursorUtil *cursorUtil);
 	void setLabel(irr::gui::IGUIStaticText* label);
 	virtual bool OnEvent(const SEvent& event);
+private:
+	CursorUtil *cursorUtil;
+	irr::gui::IGUIStaticText* label;
 };
 
 #endif /* MOUSEEVENTRECEIVER_H_ */
