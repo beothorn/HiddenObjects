@@ -2,6 +2,7 @@
 #include <string>
 
 #include "MouseEventReceiver.h"
+#include "objects/SydneyFactory.h"
 #include "CursorUtil.h"
 
 #include <iostream>
@@ -64,23 +65,9 @@ void setupGame(){
 	device->setWindowCaption(L"Find the hidden objects");
 	irr::gui::IGUIStaticText* label = guienv->addStaticText(L"Lets hope this one works", rect<s32>(10, 10, 260, 22), true);
 
-	std::string resources = "./resources/";
-	std::string sydneyMesh = "sydney.md2";
-	std::string sydneyMaterial = "sydney.bmp";
-	IAnimatedMesh* mesh = sceneManager->getMesh((resources+sydneyMesh).c_str());
-	if (!mesh)
-	{
-		endGame();
-		exit(1);
-	}
-	IAnimatedMeshSceneNode* node = sceneManager->addAnimatedMeshSceneNode( mesh );
-	if (node)
-	{
-		node->setMaterialFlag(EMF_LIGHTING, false);
-		node->setMD2Animation(scene::EMAT_RUN);
-		node->setMaterialTexture( 0, driver->getTexture((resources+sydneyMaterial).c_str()) );
-		node->setName(L"foo");
-	}
+	SydneyFactory sydneyFactory(sceneManager,driver);
+	for(int i = -30*5; i < 30*5;i+=30)
+		sydneyFactory.produce(i);
 
 	mouseEventReceiver.setLabel(label);
 
