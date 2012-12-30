@@ -3,6 +3,7 @@
 
 #include "MouseEventReceiver.h"
 #include "objects/SydneyFactory.h"
+#include "objects/AnnyFactory.h"
 #include "CursorUtil.h"
 
 #include <iostream>
@@ -66,8 +67,13 @@ void setupGame(){
 	irr::gui::IGUIStaticText* label = guienv->addStaticText(L"Lets hope this one works", rect<s32>(10, 10, 260, 22), true);
 
 	SydneyFactory sydneyFactory(sceneManager,driver);
-	for(int i = -30*5; i < 30*5;i+=30)
-		sydneyFactory.produce(i);
+	AnnyFactory annyFactory(sceneManager,driver);
+	for(int i = -30*5; i < 30*5;i+=30){
+		if((i/30)%2==0)
+			sydneyFactory.produce(i,0,0);
+		else
+			annyFactory.produce(i,0,0);
+	}
 
 	mouseEventReceiver.setLabel(label);
 

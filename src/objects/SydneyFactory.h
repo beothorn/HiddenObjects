@@ -6,7 +6,7 @@
 class SydneyFactory {
 public:
 	SydneyFactory(irr::scene::ISceneManager* sceneManager,irr::video::IVideoDriver* driver);
-	void produce(int x);
+	void produce(int x,int y,int z);
 private:
 	irr::scene::ISceneManager* sceneManager;
 	irr::video::IVideoDriver* driver;
