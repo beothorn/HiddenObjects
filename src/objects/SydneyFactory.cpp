@@ -26,6 +26,6 @@ void SydneyFactory::produce(int x,int y,int z){
 		node->setMD2Animation(scene::EMAT_RUN);
 		node->setMaterialTexture( 0, driver->getTexture((resources+sydneyMaterial).c_str()) );
 		node->setName(L"Sydney");
-		node->setPosition(core::vector3df(x,0,0));
+		node->setPosition(core::vector3df(x,y,z));
 	}
 }

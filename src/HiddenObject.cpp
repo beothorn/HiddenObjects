@@ -70,9 +70,9 @@ void setupGame(){
 	AnnyFactory annyFactory(sceneManager,driver);
 	for(int i = -30*5; i < 30*5;i+=30){
 		if((i/30)%2==0)
-			sydneyFactory.produce(i,0,0);
+			sydneyFactory.produce(i,i,i);
 		else
-			annyFactory.produce(i,0,0);
+			annyFactory.produce(i,i,i);
 	}
 
 	mouseEventReceiver.setLabel(label);
