@@ -38,9 +38,9 @@ IVideoDriver* driver;
 IGUIEnvironment* guienv;
 
 void startEngine(){
-	irr::video::E_DRIVER_TYPE deviceType = video::EDT_SOFTWARE;
-	int width = 800;
-	int height = 600;
+	irr::video::E_DRIVER_TYPE deviceType = video::EDT_OPENGL;
+	int width = 1042;
+	int height = 720;
 	irr::core::dimension2d<unsigned int> windowSize = dimension2d<u32>(width,height);
 	int bits = 16;
 	bool fullscreen = false;
