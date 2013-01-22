@@ -12,8 +12,8 @@ AnnyFactory::AnnyFactory(ISceneManager* psceneManager, IVideoDriver* pdriver) {
 
 void AnnyFactory::produce(int x,int y,int z){
 	std::string resources = "./resources/";
-	std::string sydneyMesh = "sydney.md2";
-	std::string sydneyMaterial = "anny.bmp";
+	std::string sydneyMesh = "monkey.obj";
+	std::string sydneyMaterial = "unwrappedPainted.png";//"monkey.bmp";
 	IAnimatedMesh* mesh = sceneManager->getMesh((resources+sydneyMesh).c_str());
 	if (!mesh)
 	{
@@ -25,7 +25,9 @@ void AnnyFactory::produce(int x,int y,int z){
 		node->setMaterialFlag(EMF_LIGHTING, false);
 		node->setMD2Animation(scene::EMAT_RUN);
 		node->setMaterialTexture( 0, driver->getTexture((resources+sydneyMaterial).c_str()) );
-		node->setName(L"Anny");
+		node->setName(L"Monkey head");
 		node->setPosition(core::vector3df(x,y,z));
+		node->setScale(core::vector3df(10,10,10));
+		node->setRotation(core::vector3df(0,200,0));
 	}
 }
