@@ -36,6 +36,8 @@ ISceneManager* sceneManager;
 MouseEventReceiver mouseEventReceiver;
 IVideoDriver* driver;
 IGUIEnvironment* guienv;
+gui::IGUIFont* font;
+const wchar_t * converted = L"Fooo";
 
 void startEngine(){
 	irr::video::E_DRIVER_TYPE deviceType = video::EDT_OPENGL;
@@ -54,6 +56,7 @@ void startEngine(){
 	CursorUtil *nodeOverMouse = new CursorUtil(collisionManager,device);
 	mouseEventReceiver.setCursorUtil(nodeOverMouse);
 	mouseEventReceiver.setSceneManager(sceneManager);
+	font = device->getGUIEnvironment()->getFont("./resources/font.png");
 
 	driver = device->getVideoDriver();
 	guienv = device->getGUIEnvironment();
@@ -75,13 +78,21 @@ void setupGame(){
 	mouseEventReceiver.setLabel(label);
 
 	sceneManager->addCameraSceneNode(0, vector3df(0,5,-100), vector3df(0,5,0));
+
+
+}
+
+void drawScene() {
+	if (font)
+		font->draw(converted,core::rect<s32>(130,10,300,50),video::SColor(255,255,255,255));
+	sceneManager->drawAll();
+	guienv->drawAll();
 }
 
 void enterGameLoop(){
 	while(device->run()){
 		driver->beginScene(true, true, SColor(255,100,101,140));
-		sceneManager->drawAll();
-		guienv->drawAll();
+		drawScene();
 		driver->endScene();
 	}
 }
