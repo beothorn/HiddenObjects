@@ -53,6 +53,7 @@ void startEngine(){
 	scene::ISceneCollisionManager* collisionManager = sceneManager->getSceneCollisionManager();
 	CursorUtil *nodeOverMouse = new CursorUtil(collisionManager,device);
 	mouseEventReceiver.setCursorUtil(nodeOverMouse);
+	mouseEventReceiver.setSceneManager(sceneManager);
 
 	driver = device->getVideoDriver();
 	guienv = device->getGUIEnvironment();
@@ -68,16 +69,12 @@ void setupGame(){
 
 	SydneyFactory sydneyFactory(sceneManager,driver);
 	AnnyFactory annyFactory(sceneManager,driver);
-	for(int i = -30*5; i < 30*5;i+=30){
-		if((i/30)%2==0)
-			sydneyFactory.produce(i,i,i);
-		else
-			annyFactory.produce(i,i,i);
-	}
+	sydneyFactory.produce(0,0,0);
+	annyFactory.produce(-40,0,0);
 
 	mouseEventReceiver.setLabel(label);
 
-	sceneManager->addCameraSceneNode(0, vector3df(0,5,-400), vector3df(0,5,0));
+	sceneManager->addCameraSceneNode(0, vector3df(0,5,-100), vector3df(0,5,0));
 }
 
 void enterGameLoop(){

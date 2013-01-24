@@ -20,6 +20,7 @@ void AnnyFactory::produce(int x,int y,int z){
 		exit(1);
 	}
 	IAnimatedMeshSceneNode* node = sceneManager->addAnimatedMeshSceneNode( mesh );
+
 	if (node)
 	{
 		node->setMaterialFlag(EMF_LIGHTING, false);
