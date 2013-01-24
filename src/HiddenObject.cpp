@@ -5,6 +5,7 @@
 #include "objects/SydneyFactory.h"
 #include "objects/AnnyFactory.h"
 #include "CursorUtil.h"
+#include <header.hpp>
 
 #include <iostream>
 
@@ -39,6 +40,7 @@ IGUIEnvironment* guienv;
 gui::IGUIFont* font;
 const wchar_t * converted = L"Fooo";
 
+
 void startEngine(){
 	irr::video::E_DRIVER_TYPE deviceType = video::EDT_OPENGL;
 	int width = 1042;
@@ -56,7 +58,9 @@ void startEngine(){
 	CursorUtil *nodeOverMouse = new CursorUtil(collisionManager,device);
 	mouseEventReceiver.setCursorUtil(nodeOverMouse);
 	mouseEventReceiver.setSceneManager(sceneManager);
-	font = device->getGUIEnvironment()->getFont("./resources/font.png");
+
+	std::string fontFile = "font.png";
+	font = device->getGUIEnvironment()->getFont((constants::RESOURCES+fontFile).c_str());
 
 	driver = device->getVideoDriver();
 	guienv = device->getGUIEnvironment();
