@@ -5,6 +5,7 @@
 #include "objects/SydneyFactory.h"
 #include "objects/AnnyFactory.h"
 #include "CursorUtil.h"
+#include "ObjectsList.h"
 #include <header.hpp>
 
 #include <iostream>
@@ -37,8 +38,7 @@ ISceneManager* sceneManager;
 MouseEventReceiver mouseEventReceiver;
 IVideoDriver* driver;
 IGUIEnvironment* guienv;
-gui::IGUIFont* font;
-const wchar_t * converted = L"Fooo";
+ObjectsList* objectsList;
 
 
 void startEngine(){
@@ -59,9 +59,6 @@ void startEngine(){
 	mouseEventReceiver.setCursorUtil(nodeOverMouse);
 	mouseEventReceiver.setSceneManager(sceneManager);
 
-	std::string fontFile = "font.png";
-	font = device->getGUIEnvironment()->getFont((constants::RESOURCES+fontFile).c_str());
-
 	driver = device->getVideoDriver();
 	guienv = device->getGUIEnvironment();
 }
@@ -78,19 +75,17 @@ void setupGame(){
 	AnnyFactory annyFactory(sceneManager,driver);
 	sydneyFactory.produce(0,0,0);
 	annyFactory.produce(-40,0,0);
+	objectsList = new ObjectsList(device);
 
 	mouseEventReceiver.setLabel(label);
 
 	sceneManager->addCameraSceneNode(0, vector3df(0,5,-100), vector3df(0,5,0));
-
-
 }
 
 void drawScene() {
-	if (font)
-		font->draw(converted,core::rect<s32>(130,10,300,50),video::SColor(255,255,255,255));
 	sceneManager->drawAll();
 	guienv->drawAll();
+	objectsList->drawAll();
 }
 
 void enterGameLoop(){
