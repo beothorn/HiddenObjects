@@ -18,7 +18,6 @@ using namespace core;
 using namespace scene;
 using namespace video;
 using namespace io;
-using namespace gui;
 
 /*
 To be able to use the Irrlicht.DLL file, we need to link with the Irrlicht.lib.
@@ -37,7 +36,6 @@ IrrlichtDevice *device;
 ISceneManager* sceneManager;
 MouseEventReceiver mouseEventReceiver;
 IVideoDriver* driver;
-IGUIEnvironment* guienv;
 ObjectsList* objectsList;
 
 
@@ -60,7 +58,6 @@ void startEngine(){
 	mouseEventReceiver.setSceneManager(sceneManager);
 
 	driver = device->getVideoDriver();
-	guienv = device->getGUIEnvironment();
 }
 
 void endGame(){
@@ -69,7 +66,6 @@ void endGame(){
 
 void setupGame(){
 	device->setWindowCaption(L"Find the hidden objects");
-	irr::gui::IGUIStaticText* label = guienv->addStaticText(L"Lets hope this one works", rect<s32>(10, 10, 260, 22), true);
 
 	objectsList = new ObjectsList(device);
 
@@ -78,7 +74,6 @@ void setupGame(){
 	sydneyFactory.produce(0,0,0);
 	annyFactory.produce(-40,0,0);
 
-	mouseEventReceiver.setLabel(label);
 	mouseEventReceiver.setObjectList(objectsList);
 
 	sceneManager->addCameraSceneNode(0, vector3df(0,5,-100), vector3df(0,5,0));
@@ -86,7 +81,6 @@ void setupGame(){
 
 void drawScene() {
 	sceneManager->drawAll();
-	guienv->drawAll();
 	objectsList->drawAll();
 }
 

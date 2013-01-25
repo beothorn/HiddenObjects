@@ -17,12 +17,10 @@ class MouseEventReceiver: public irr::IEventReceiver {
 public:
 	void setCursorUtil(CursorUtil *cursorUtil);
 	void setSceneManager(irr::scene::ISceneManager *sceneManager);
-	void setLabel(irr::gui::IGUIStaticText* label);
 	void setObjectList(ObjectsList *objectsList);
 	virtual bool OnEvent(const SEvent& event);
 private:
 	CursorUtil *cursorUtil;
-	irr::gui::IGUIStaticText* label;
 	irr::scene::ISceneManager *sceneManager;
 	ObjectsList *objectsList;
 };
