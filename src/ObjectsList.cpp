@@ -21,9 +21,16 @@ ObjectsList::ObjectsList(IrrlichtDevice *device) {
 	font = device->getGUIEnvironment()->getFont((constants::RESOURCES+fontFile).c_str());
 
 	objects = new list<wstring>();
-	objects->insert(objects->end(), L"Object");
-	objects->insert(objects->end(), L"Another object");
 }
+
+void ObjectsList::addObject(const wchar_t* newObject){
+	objects->insert(objects->end(), newObject);
+}
+
+void ObjectsList::removeObject(const wchar_t* removeObject){
+	objects->remove(removeObject);
+}
+
 
 void ObjectsList::drawAll(){
 	list<wstring>::const_iterator cii;

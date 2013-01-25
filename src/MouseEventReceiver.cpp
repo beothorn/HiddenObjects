@@ -18,6 +18,10 @@ void MouseEventReceiver::setLabel(irr::gui::IGUIStaticText* plabel){
 	label = plabel;
 }
 
+void MouseEventReceiver::setObjectList(ObjectsList *pobjectsList){
+	objectsList = pobjectsList;
+}
+
 bool MouseEventReceiver::OnEvent(const SEvent& event) {
 	if (event.EventType == irr::EET_MOUSE_INPUT_EVENT) {
 		switch (event.MouseInput.Event) {
@@ -28,6 +32,7 @@ bool MouseEventReceiver::OnEvent(const SEvent& event) {
 					nodeClicked->addAnimator(anim);
 					irr::core::stringw tempryw = nodeClicked->getName();
 					const wchar_t * converted = tempryw.c_str();
+					objectsList->removeObject(converted);
 					label->setText(converted);
 				}
 			}

@@ -71,13 +71,15 @@ void setupGame(){
 	device->setWindowCaption(L"Find the hidden objects");
 	irr::gui::IGUIStaticText* label = guienv->addStaticText(L"Lets hope this one works", rect<s32>(10, 10, 260, 22), true);
 
-	SydneyFactory sydneyFactory(sceneManager,driver);
-	AnnyFactory annyFactory(sceneManager,driver);
-	sydneyFactory.produce(0,0,0);
-	annyFactory.produce(-40,0,0);
 	objectsList = new ObjectsList(device);
 
+	SydneyFactory sydneyFactory(sceneManager,driver,objectsList);
+	AnnyFactory annyFactory(sceneManager,driver,objectsList);
+	sydneyFactory.produce(0,0,0);
+	annyFactory.produce(-40,0,0);
+
 	mouseEventReceiver.setLabel(label);
+	mouseEventReceiver.setObjectList(objectsList);
 
 	sceneManager->addCameraSceneNode(0, vector3df(0,5,-100), vector3df(0,5,0));
 }

@@ -14,6 +14,8 @@ class ObjectsList {
 public:
 	ObjectsList(irr::IrrlichtDevice *device);
 	void drawAll();
+	void addObject(const wchar_t* newObject);
+	void removeObject(const wchar_t* removeObject);
 private:
 	irr::gui::IGUIFont* font;
 };
