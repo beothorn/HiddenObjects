@@ -17,7 +17,7 @@ using namespace std;
 list<wstring>* objects;
 
 ObjectsList::ObjectsList(IrrlichtDevice *device) {
-	string fontFile = "font.png";
+	string fontFile = "font/myfont.xml";
 	font = device->getGUIEnvironment()->getFont((constants::RESOURCES+fontFile).c_str());
 
 	objects = new list<wstring>();
