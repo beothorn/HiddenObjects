@@ -19,6 +19,8 @@ using namespace scene;
 using namespace video;
 using namespace io;
 
+using namespace constants;
+
 /*
 To be able to use the Irrlicht.DLL file, we need to link with the Irrlicht.lib.
 We could set this option in the project settings, but to make it easy, we use a
@@ -38,11 +40,13 @@ MouseEventReceiver mouseEventReceiver;
 IVideoDriver* driver;
 ObjectsList* objectsList;
 
+video::ITexture* hud;
+
 
 void startEngine(){
 	irr::video::E_DRIVER_TYPE deviceType = video::EDT_OPENGL;
-	int width = 1042;
-	int height = 720;
+	int width = 1366;
+	int height = 768;
 	irr::core::dimension2d<unsigned int> windowSize = dimension2d<u32>(width,height);
 	int bits = 16;
 	bool fullscreen = false;
@@ -77,11 +81,17 @@ void setupGame(){
 	mouseEventReceiver.setObjectList(objectsList);
 
 	sceneManager->addCameraSceneNode(0, vector3df(0,5,-100), vector3df(0,5,0));
+
+	std::string sydneyMaterial = "hud.png";
+	hud = driver->getTexture((RESOURCES+sydneyMaterial).c_str());
 }
 
 void drawScene() {
 	sceneManager->drawAll();
 	objectsList->drawAll();
+	driver->enableMaterial2D();
+	driver->draw2DImage(hud, core::position2d<s32>(0,0), core::rect<s32>(0,0,1366,768), 0, video::SColor(255,255,255,255), true);
+	driver->enableMaterial2D(false);
 }
 
 void enterGameLoop(){
