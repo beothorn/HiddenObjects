@@ -88,15 +88,13 @@ void setupGame(){
 
 void drawScene() {
 	sceneManager->drawAll();
-	objectsList->drawAll();
-	driver->enableMaterial2D();
 	driver->draw2DImage(hud, core::position2d<s32>(0,0), core::rect<s32>(0,0,1366,768), 0, video::SColor(255,255,255,255), true);
-	driver->enableMaterial2D(false);
+	objectsList->drawAll();
 }
 
 void enterGameLoop(){
 	while(device->run()){
-		driver->beginScene(true, true, SColor(255,100,101,140));
+		driver->beginScene(true, true, SColor(101,101,101,101));
 		drawScene();
 		driver->endScene();
 	}

@@ -34,14 +34,18 @@ void ObjectsList::removeObject(const wchar_t* removeObject){
 
 void ObjectsList::drawAll(){
 	list<wstring>::const_iterator cii;
-	int cursorX = 130;
-	int y = 10;
-	int spacing = 10;
+	int width = 218;
+	int height = 45;
+
+	int x = 448;
+	int y = 642;
+
+
 	for(cii=objects->begin(); cii!=objects->end(); ++cii){
 		const wchar_t* cStr = cii->c_str();
-		irr::core::dimension2d<unsigned int> stringSize = font->getDimension(cStr);
-		font->draw(cStr, core::rect<s32>(cursorX, y, cursorX+stringSize.Width, y+stringSize.Height),video::SColor(255, 255, 255, 255));
-		cursorX += stringSize.Width + spacing;
+		font->draw(cStr, core::rect<s32>(x , y , x+width, y+height),video::SColor(255, 255, 255, 255),true,true);
+		x += width + 7;
+		y += height + 6;
 	}
 }
 
